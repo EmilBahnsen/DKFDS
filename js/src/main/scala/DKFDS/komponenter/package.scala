@@ -1,5 +1,6 @@
 package DKFDS
 
+import DKFDS.komponenter.CheckboxList.Checkbox
 import DKFDS.komponenter.Komponent.DOMTool
 import org.scalajs.dom.*
 import scalatags.Text
@@ -9,6 +10,9 @@ import scalatags.Text.all.Frag
 package object komponenter:
     export DKFDS.komponenter.DropdownJS.given_Conversion_Dropdown_HTMLSelectElement
     export DKFDS.komponenter.AttachmentJS.given_Conversion_Attachment_HTMLInputElement
+    export DKFDS.komponenter.TooltipJS.*
+    export DKFDS.komponenter.TooltipJS.given_Conversion_Tooltip_HTMLButtonElement
+    export DKFDS.komponenter.FormularJS.given_Conversion_Formular_HTMLFormElement
 
     given Conversion[Komponent2, Element] = k => document.getElementById(k.anId)
 
@@ -17,6 +21,12 @@ package object komponenter:
 
         override def replaceInnerHtml(anId: String, tag: Frag): Unit =
             document.getElementById(anId).innerHTML = tag.render
+
+        override def addClass(anId: ByteString, text: ByteString): Unit =
+            document.getElementById(anId).classList.add(text)
+
+        override def removeClass(anId: ByteString, text: ByteString): Unit =
+            document.getElementById(anId).classList.remove(text)
 
         override def replaceInnerText(anId: String, text: String): Unit =
             document.getElementById(anId).innerText = text

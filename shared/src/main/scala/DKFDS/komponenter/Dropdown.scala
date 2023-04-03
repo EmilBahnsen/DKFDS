@@ -5,14 +5,15 @@ import scalatags.Text
 import scalatags.Text.all.*
 
 case class Dropdown(override val anId: String, labelText: String, someValues: Map[Any, String]) extends Komponent2:
-  override val tag: Tag = div(
+  val groupId: String = s"$anId-group"
+  override val tag: Tag = div(cls := "form-group", id := s"$anId-group")(
     label(cls := "form-label", `for` := anId)(labelText),
     select(cls := "form-select", name := anId, id := anId)(
       someValues.map(v => option(value := v._1.toString)(v._2)).toSeq
     )
   )
 
-  def values_=(newValues: Map[Any, String])(using dt: DOMTool): Unit = dt.replaceInnerHtml(anId,
+  def values_=(newValues: Seq[(Any, String)])(using dt: DOMTool): Unit = dt.replaceInnerHtml(anId,
     newValues.map(v => option(value := v._1.toString)(v._2)).toSeq
   )
 

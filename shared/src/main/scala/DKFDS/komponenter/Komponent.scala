@@ -2,6 +2,8 @@ package DKFDS.komponenter
 
 import scalatags.Text.all.*
 
+import java.util.UUID
+
 trait Komponent(val anId: String):
   val placeholderId: String = s"$anId-placeholder"
   val placeholder: BaseTagType = div(id := s"$anId-placeholder")
@@ -33,3 +35,7 @@ object Komponent:
     def replaceInnerHtml(anId: String, tag: Frag): Unit
 
     def replaceInnerText(anId: String, text: String): Unit
+
+    def addClass(anId: String, text: String): Unit
+
+    def removeClass(anId: String, text: String): Unit

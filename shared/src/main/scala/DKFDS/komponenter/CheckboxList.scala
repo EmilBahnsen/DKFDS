@@ -37,8 +37,8 @@ object CheckboxList:
         {
           if content.nonEmpty then
             Seq(
-              aria.expanded := false,
-              aria.controls := s"collapse-$anId",
+              data("aria-expanded") := false,
+              data("aria-controls") := s"collapse-$anId",
               cls := "js-checkbox-toggle-content"
             )
           else

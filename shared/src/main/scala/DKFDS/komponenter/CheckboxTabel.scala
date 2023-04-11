@@ -33,7 +33,7 @@ class CheckboxTabel(override val anId: String,
               td(
                 input(
                   id := rowId,
-                  name := s"$anId-check[]",
+                  name := s"$anId-check",
                   `type` := "checkbox",
                   cls := "form-checkbox",
                   value := selectValue
@@ -50,4 +50,4 @@ class CheckboxTabel(override val anId: String,
   )
 
 object CheckboxTabel:
-  def loading(anId: String): CheckboxTabel = CheckboxTabel(anId, Seq("Loader..."), Seq(Seq(span("Loader..."))), Seq("Loader..."), LineHeight.Normal)
+  def loading(anId: String): CheckboxTabel = CheckboxTabel(anId, Seq("Loader..."), Seq(Seq(span("Loader..."))), Seq("Loader..."), LineHeight.ExtraCompact)

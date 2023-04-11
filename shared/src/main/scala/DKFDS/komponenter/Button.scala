@@ -12,11 +12,8 @@ case class Button(override val anId: String, variant: ButtonVariant, text: Strin
 
 object Button:
   def primary(anId: String, text: String): Button = Button(anId, Primary, text)
-
   def secondary(anId: String, text: String): Button = Button(anId, Secondary, text)
-
   def tertiary(anId: String, text: String): Button = Button(anId, Tertiary, text)
-
   def back(anId: String, text: String): Button = Button(anId, Back, text)
 
   enum ButtonVariant(clsName: String):

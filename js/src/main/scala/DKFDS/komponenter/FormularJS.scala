@@ -12,11 +12,13 @@ object FormularJS:
 
       // Checkboxes
       val inputs: HTMLCollection[Element] = formular.getElementsByTagName("input")
+      println(s"Restoring ${inputs.size} elements.")
       inputs.map(_.asInstanceOf[HTMLInputElement]).foreach(e => {
         e.getAttribute("type") match
           case "checkbox" =>
-            if (!e.checked && params.has(e.name)) || (e.checked && !params.has(e.name)) then
-              e.click() // We have to click it for the DKFDS-script to do their thing
+            if (!e.checked && params.has(e.name) && params.getAll(e.name).contains(e.value)) ||
+               (e.checked && !params.has(e.name) && params.getAll(e.name).contains(e.value)) then
+              e.click() // We have to click it for the DKFDS-script to do its thing
           case "text" =>
             if e.name.nonEmpty && params.has(e.name) then
               // Date pickers are a special case

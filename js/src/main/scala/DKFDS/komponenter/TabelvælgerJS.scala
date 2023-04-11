@@ -4,6 +4,8 @@ import CheckboxTabelJS.*
 import DKFDS.Modal
 import org.scalajs.dom.{HTMLAnchorElement, document}
 
+import scala.collection.immutable.{AbstractSeq, LinearSeq}
+
 object TabelvælgerJS:
   given Conversion[Tabelvælger, Modal] = t => new Modal(document.getElementById(t.modalId))
   extension (vælger: Tabelvælger)
@@ -14,10 +16,10 @@ object TabelvælgerJS:
         vælger.show()
       }
       vælger.table.onupdated_=(e => {
-        val values = vælger.table.selectedValues
-        if values.nonEmpty then
-          vælgerButton.innerText = values.mkString(", ")
-        else
-          vælgerButton.innerText = vælger.defaultText
+        // Map all the data as text and display it
+        val values = vælger.table.selectedRows.map(_.innerText.replace("Vælg række", ""))  // TODO
+        vælgerButton.innerText = values match
+          case Nil => vælger.defaultText
+          case _ => values.mkString(",\n")
       })
     }

@@ -11,7 +11,7 @@ object TabelvælgerJS:
   extension (vælger: Tabelvælger)
     def vælgerButton: HTMLAnchorElement = document.getElementById(vælger.anId).asInstanceOf[HTMLAnchorElement]
     def init(): Unit = {
-      CheckboxTabelJS.init(vælger.table)()
+      vælger.table.init()
       vælgerButton.onclick = e => {
         vælger.show()
       }

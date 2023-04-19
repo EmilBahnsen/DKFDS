@@ -7,7 +7,7 @@ import scalatags.Text.all.*
 object CheckboxTabelJS:
   given Conversion[CheckboxTabel, HTMLTableElement] = t => document.getElementById(t.anId).asInstanceOf[HTMLTableElement]
 
-  extension (tabel: CheckboxTabel)
+  implicit class CheckboxTabelOps(tabel: CheckboxTabel):
     def inputs: Seq[HTMLInputElement] = 
       tabel.getElementsByTagName("tbody").head.getElementsByTagName("input").map(_.asInstanceOf[HTMLInputElement]).toSeq
 
@@ -19,7 +19,6 @@ object CheckboxTabelJS:
     def init(): Unit = new TableSelectableRows(tabel).init()
 
     def update(headers: Seq[String], data: Seq[Seq[Tag]], selectValues: Seq[String]): Unit =
-      println("Replacing content!")
       val newTable = new CheckboxTabel(tabel.anId, headers, data, selectValues, tabel.lineHeight)
       newTable.init()
       document.getElementById(tabel.wrapperId).innerHTML = newTable.tag.render

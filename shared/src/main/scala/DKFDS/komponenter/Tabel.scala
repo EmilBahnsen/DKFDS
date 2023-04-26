@@ -3,6 +3,8 @@ import DKFDS.komponenter.Tabel.LineHeight
 import DKFDS.komponenter.Tabel.LineHeight.Normal
 import scalatags.Text.all.*
 
+import java.util.UUID
+
 case class Tabel(override val anId: String) extends Komponent(anId):
   val tableId: String = s"$anId-tabel"
 
@@ -71,6 +73,12 @@ case class Tabel(override val anId: String) extends Komponent(anId):
                 )
       )
     )
+
+  def apply(data: Seq[Product], lineHeight: LineHeight): Tabel with DOMTag2 = if data.nonEmpty then {
+    val labels = data.head.productElementNames.map(span(_)).toSeq
+    val displayData = data.map(_.productIterator.map(e => span(e.toString)).toSeq)
+    Tabel(UUID.randomUUID().toString)(labels, displayData, lineHeight)
+  } else Tabel("")(Seq("No data"), Seq(Seq(span("No data"))), lineHeight)
 
 object Tabel:
   enum LineHeight(val modifier: Modifier):

@@ -5,8 +5,7 @@ import scalatags.Text.all.*
 import java.util.UUID
 
 trait Komponent(val anId: String):
-  val placeholderId: String = s"$anId-placeholder"
-  val placeholder: BaseTagType = div(id := s"$anId-placeholder")
+  val placeholder: BaseTagType = div(id := anId)
 
 trait Komponent2:
   val anId: String

@@ -10,8 +10,13 @@ trait Tekstområde extends DOMTag:
 
 object Tekstområde:
     def apply(anId: String)
-             (labelText: String, errorText: String = "", rowsNum: Int, widthClass: String, fontFamilyName: String): Tekstområde =
+             (labelText: String,
+              rowsNum: Int,
+              errorText: String = "",
+              widthClass: String = "",
+              fontFamilyName: String = "inherit", isDisabled: Boolean = false): Tekstområde =
       new Tekstområde with DOMTag(anId):
+        private val areaMods = if isDisabled then Seq(disabled) else Seq.empty
         override def tag: BaseTagType =
           div(cls := "form-group", id := formId)(
             label(cls := "form-label", `for` := areaId)(labelText),
@@ -19,7 +24,7 @@ object Tekstområde:
               span(cls := "sr-only")("Fejl:"),
               errorText
             ),
-            textarea(
+            textarea(areaMods*)(
               cls := "form-input " + widthClass,
               rows := rowsNum,
                         id := areaId,

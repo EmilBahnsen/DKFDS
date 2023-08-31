@@ -13,6 +13,7 @@ package object komponenter:
     export DKFDS.komponenter.TooltipJS.*
     export DKFDS.komponenter.TooltipJS.given_Conversion_Tooltip_HTMLButtonElement
     export DKFDS.komponenter.FormularJS.given_Conversion_Formular_HTMLFormElement
+    export DKFDS.komponenter.Komponent.given_Conversion_Komponent2_Tag
 
     given Conversion[Komponent2, Element] = k => document.getElementById(k.anId)
 
@@ -32,12 +33,7 @@ package object komponenter:
             document.getElementById(anId).innerText = text
 
     extension (komponent: Komponent with DOMTag2)
-        def updatePlaceholder(): Unit = document.getElementById(komponent.placeholderId).innerHTML = komponent
-
-    extension (acc: Accordion)
-        def textPara: HTMLParagraphElement = document.getElementById(acc.tekstId).asInstanceOf[HTMLParagraphElement]
-        def text: String = textPara.innerText
-        def text_=(value: String): Unit = textPara.innerText = value
+        def updatePlaceholder(): Unit = document.getElementById(komponent.anId).innerHTML = komponent
 
     extension (tekstområde: Tekstområde)
         def form: HTMLDivElement = document.getElementById(tekstområde.formId).asInstanceOf[HTMLDivElement]

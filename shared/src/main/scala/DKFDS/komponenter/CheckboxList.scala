@@ -52,7 +52,7 @@ object CheckboxList:
       )
     )
 
-    def apply(content: Tag*): Checkbox = copy(content = content)
+    def apply(moreContent: Tag*): Checkbox = copy(content = content ++ moreContent)
 
   object Checkbox:
     def small(text: String, nameValue: (String, Any), isChecked: Boolean = false): Checkbox =

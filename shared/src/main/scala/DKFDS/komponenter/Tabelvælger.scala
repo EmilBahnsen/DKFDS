@@ -2,8 +2,10 @@ package DKFDS.komponenter
 import scalatags.Text.all.*
 import scalatags.Text.all.tag as tagg
 import DKFDS.komponenter.Komponent.given_Conversion_Komponent2_Tag
+import DKFDS.komponenter.Tabelvælger.DisplayStyle
+import DKFDS.komponenter.Tabelvælger.DisplayStyle.CountLabels
 
-case class Tabelvælger(override val anId: String, aLabel: String, defaultText: String) extends Komponent2:
+case class Tabelvælger(override val anId: String, aLabel: String, defaultText: String, displayStyle: DisplayStyle = CountLabels) extends Komponent2:
   val table: CheckboxTabel = CheckboxTabel.loading(s"$anId-table")
   val modalId: String = s"$anId-modal"
   override val tag: Tag = div(cls := "from-group")(
@@ -34,3 +36,8 @@ case class Tabelvælger(override val anId: String, aLabel: String, defaultText: 
       )
     )
   )
+
+object Tabelvælger:
+  enum DisplayStyle:
+    case AllLabels
+    case CountLabels

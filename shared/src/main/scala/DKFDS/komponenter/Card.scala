@@ -16,7 +16,7 @@ object Card:
   lazy val cardFooter: ConcreteHtmlTag[String] = div(cls := "card-footer")
 
   def apply(anId: String, headerText: String, subHeaderText: String, subText: String)(content: Tag*): Card = Card(anId) (
-    cardHeader (
+    cardHeader(
       cardTitle(headerText),
       cardSubHeader(subHeaderText)
     ),

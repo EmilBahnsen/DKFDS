@@ -8,13 +8,15 @@ object CheckboxTabelJS:
   given Conversion[CheckboxTabel, HTMLTableElement] = t => document.getElementById(t.anId).asInstanceOf[HTMLTableElement]
 
   implicit class CheckboxTabelOps(tabel: CheckboxTabel):
-    def inputs: Seq[HTMLInputElement] = 
+    def inputs: Seq[HTMLInputElement] =
       tabel.getElementsByTagName("tbody").head.getElementsByTagName("input").map(_.asInstanceOf[HTMLInputElement]).toSeq
 
     def size: Int = inputs.size
     def values: Seq[String] = inputs.map(i => Option(i.value)).filter(_.nonEmpty).map(_.get)
+    def valuesAsInt: Seq[Int] = values.map(_.toInt)
     def selectedRows: Seq[HTMLTableRowElement] = inputs.filter(_.checked).map(_.parentElement.parentElement.asInstanceOf[HTMLTableRowElement])
     def selectedValues: Seq[String] = inputs.filter(_.checked).map(i => Option(i.value)).filter(_.nonEmpty).map(_.get)
+    def selectedValuesAsInt: Seq[Int] = inputs.filter(_.checked).map(i => Option(i.value)).filter(_.nonEmpty).map(_.get.toInt)
 
     def init(): Unit = new TableSelectableRows(tabel).init()
 

@@ -6,7 +6,7 @@ abstract class OverflowMenu(override val anId: String) extends Komponent2:
   val buttonId: String = s"$anId-overflow-button"
 
 object OverflowMenu:
-  def noDots(anId: String, text: String, items: Tag*): OverflowMenu = new OverflowMenu(anId):
+  def noDots(anId: String, text: Tag, items: Tag*): OverflowMenu = new OverflowMenu(anId):
     override val tag: Tag = div(cls := "overflow-menu overflow-menu--open-right")(
       button(
         id := buttonId,

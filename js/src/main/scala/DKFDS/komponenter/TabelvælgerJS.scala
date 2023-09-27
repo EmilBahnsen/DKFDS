@@ -2,6 +2,7 @@ package DKFDS.komponenter
 
 import CheckboxTabelJS.*
 import DKFDS.Modal
+import DKFDS.komponenter.Tabelvælger.DisplayStyle.{AllLabels, CountLabels}
 import org.scalajs.dom.{HTMLAnchorElement, document}
 
 import scala.collection.immutable.{AbstractSeq, LinearSeq}
@@ -20,6 +21,8 @@ object TabelvælgerJS:
         val values = vælger.table.selectedRows.map(_.innerText.replace("Vælg række", ""))  // TODO
         vælgerButton.innerText = values match
           case Nil => vælger.defaultText
-          case _ => values.mkString(",\n")
+          case _ => vælger.displayStyle match
+            case AllLabels => values.mkString(",\n")
+            case CountLabels => s"${values.size} valgt"
       })
     }
